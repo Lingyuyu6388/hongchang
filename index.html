@@ -5,19 +5,31 @@
     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
     <title>宏昌塑胶 - 专业塑胶制品供应商</title>
     <link rel=\"stylesheet\" href=\"css/style.css\">
+    <!-- 引入 Google Fonts -->
+    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">
+    <link href=\"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap\" rel=\"stylesheet\">
 </head>
 <body>
+    <!-- 加载动画 -->
+    <div class=\"loader\" id=\"loader\">
+        <div class=\"loader-circle\"></div>
+        <p class=\"loader-text\">宏昌塑胶</p>
+    </div>
+
     <!-- 导航栏 -->
-    <nav class=\"navbar\">
+    <nav class=\"navbar\" id=\"navbar\">
         <div class=\"container nav-content\">
-            <div class=\"logo\">宏昌塑胶</div>
-            <ul class=\"nav-links\">
-                <li><a href=\"#home\">首页</a></li>
-                <li><a href=\"#about\">关于我们</a></li>
-                <li><a href=\"#products\">产品中心</a></li>
-                <li><a href=\"#contact\">联系我们</a></li>
+            <a href=\"#home\" class=\"logo\">
+                <span class=\"logo-icon\">宏</span>
+                <span class=\"logo-text\">宏昌塑胶</span>
+            </a>
+            <ul class=\"nav-links\" id=\"navLinks\">
+                <li><a href=\"#home\" class=\"nav-link active\">首页</a></li>
+                <li><a href=\"#about\" class=\"nav-link\">关于我们</a></li>
+                <li><a href=\"#products\" class=\"nav-link\">产品中心</a></li>
+                <li><a href=\"#contact\" class=\"nav-link\">联系我们</a></li>
             </ul>
-            <div class=\"hamburger\">
+            <div class=\"hamburger\" id=\"hamburger\">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -27,34 +39,97 @@
 
     <!-- 首页横幅 -->
     <section id=\"home\" class=\"hero\">
+        <div class=\"hero-bg-pattern\"></div>
         <div class=\"container hero-content\">
-            <h1>专业塑胶制品供应商</h1>
-            <p>宏昌塑胶致力于为客户提供高品质的塑胶产品及解决方案</p>
-            <a href=\"#products\" class=\"btn-primary\">查看产品</a>
+            <div class=\"hero-badge fade-up\">专注塑胶制品 · 品质值得信赖</div>
+            <h1 class=\"fade-up delay-1\">专业塑胶制品<br>供应商</h1>
+            <p class=\"fade-up delay-2\">宏昌塑胶致力于为客户提供高品质的塑胶产品及一站式解决方案</p>
+            <div class=\"hero-buttons fade-up delay-3\">
+                <a href=\"#products\" class=\"btn-primary\">查看产品</a>
+                <a href=\"#contact\" class=\"btn-secondary\">联系我们</a>
+            </div>
+        </div>
+        <div class=\"hero-scroll-indicator\">
+            <span>向下滚动</span>
+            <div class=\"scroll-arrow\"></div>
+        </div>
+    </section>
+
+    <!-- 优势亮点 -->
+    <section class=\"advantages fade-in\">
+        <div class=\"container\">
+            <div class=\"advantage-grid\">
+                <div class=\"advantage-item\">
+                    <div class=\"advantage-icon\">🏭</div>
+                    <h3>源头工厂</h3>
+                    <p>自有生产线，直接从工厂发货，价格更优惠</p>
+                </div>
+                <div class=\"advantage-item\">
+                    <div class=\"advantage-icon\">✅</div>
+                    <h3>品质保证</h3>
+                    <p>严格质检流程，确保每一件产品符合标准</p>
+                </div>
+                <div class=\"advantage-item\">
+                    <div class=\"advantage-icon\">⚡</div>
+                    <h3>快速交付</h3>
+                    <p>库存充足，订单确认后快速安排发货</p>
+                </div>
+                <div class=\"advantage-item\">
+                    <div class=\"advantage-icon\">🎯</div>
+                    <h3>量身定制</h3>
+                    <p>可根据客户需求定制各种规格和产品</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- 关于我们 -->
     <section id=\"about\" class=\"about\">
         <div class=\"container\">
-            <h2 class=\"section-title\">关于我们</h2>
-            <div class=\"about-content\">
-                <div class=\"about-text\">
-                    <p>宏昌塑胶是一家专业从事塑胶制品研发、生产、销售的企业。我们拥有先进的生产设备和技术团队，为客户提供高品质的塑胶产品和完善的售后服务。</p>
-                    <p>我们的产品广泛应用于工业、电子、汽车、家电等多个领域，深受客户信赖。我们始终坚持\"质量第一、客户至上\"的经营理念，不断提升产品和服务水平。</p>
+            <div class=\"about-wrapper\">
+                <div class=\"about-left fade-in\">
+                    <span class=\"section-label\">ABOUT US</span>
+                    <h2 class=\"section-title\">关于我们</h2>
+                    <div class=\"section-line\"></div>
+                    <p class=\"about-desc\">宏昌塑胶是一家专业从事塑胶制品研发、生产、销售的企业。我们拥有先进的生产设备和技术团队，为客户提供高品质的塑胶产品和完善的售后服务。</p>
+                    <p class=\"about-desc\">我们的产品广泛应用于工业、电子、汽车、家电等多个领域，深受客户信赖。我们始终坚持\"质量第一、客户至上\"的经营理念，不断提升产品和服务水平。</p>
+                    <div class=\"about-features\">
+                        <div class=\"feature-item\">
+                            <span class=\"feature-check\">✓</span>
+                            <span>ISO 9001 质量管理体系</span>
+                        </div>
+                        <div class=\"feature-item\">
+                            <span class=\"feature-check\">✓</span>
+                            <span>10年以上行业经验</span>
+                        </div>
+                        <div class=\"feature-item\">
+                            <span class=\"feature-check\">✓</span>
+                            <span>500+ 合作客户</span>
+                        </div>
+                        <div class=\"feature-item\">
+                            <span class=\"feature-check\">✓</span>
+                            <span>100+ 产品种类</span>
+                        </div>
+                    </div>
                 </div>
-                <div class=\"about-stats\">
-                    <div class=\"stat-item\">
-                        <h3>10+</h3>
-                        <p>年行业经验</p>
-                    </div>
-                    <div class=\"stat-item\">
-                        <h3>500+</h3>
-                        <p>合作客户</p>
-                    </div>
-                    <div class=\"stat-item\">
-                        <h3>100+</h3>
-                        <p>产品种类</p>
+                <div class=\"about-right fade-in\">
+                    <div class=\"stats-grid\">
+                        <div class=\"stat-card\">
+                            <span class=\"stat-number\" data-target=\"10\">0</span><span class=\"stat-suffix\">+</span>
+                            <span class=\"stat-label\">年行业经验</span>
+                        </div>
+                        <div class=\"stat-card\">
+                            <span class=\"stat-number\" data-target=\"500\">0</span><span class=\"stat-suffix\">+</span>
+                            <span class=\"stat-label\">合作客户</span>
+                        </div>
+                        <div class=\"stat-card\">
+                            <span class=\"stat-number\" data-target=\"100\">0</span><span class=\"stat-suffix\">+</span>
+                            <span class=\"stat-label\">产品种类</span>
+                        </div>
+                        <div class=\"stat-card\">
+                            <span class=\"stat-number\" data-target=\"98\">0</span><span class=\"stat-suffix\">%</span>
+                            <span class=\"stat-label\">客户满意度</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -64,53 +139,75 @@
     <!-- 产品中心 -->
     <section id=\"products\" class=\"products\">
         <div class=\"container\">
-            <h2 class=\"section-title\">产品中心</h2>
-            <p class=\"section-desc\">我们提供多种高品质的塑胶制品，满足不同行业的需求</p>
+            <div class=\"products-header fade-in\">
+                <span class=\"section-label\">PRODUCTS</span>
+                <h2 class=\"section-title\">产品中心</h2>
+                <div class=\"section-line\"></div>
+                <p class=\"section-desc\">我们提供多种高品质的塑胶制品，满足不同行业的需求</p>
+            </div>
             <div class=\"product-grid\">
-                <div class=\"product-card\">
-                    <div class=\"product-img placeholder\"></div>
+                <div class=\"product-card fade-in\">
+                    <div class=\"product-badge\">热销</div>
+                    <div class=\"product-img\">
+                        <img src=\"https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop\" alt=\"塑胶注塑件\" loading=\"lazy\">
+                    </div>
                     <div class=\"product-info\">
-                        <h3>塑胶零件-A型</h3>
-                        <p>高品质塑胶注塑件，适用于工业自动化设备</p>
-                        <span class=\"product-tag\">热销</span>
+                        <h3>塑胶注塑件</h3>
+                        <p>高品质塑胶注塑件，适用于工业自动化设备，尺寸精准，表面光滑</p>
+                        <a href=\"#contact\" class=\"product-contact\">了解详情 →</a>
                     </div>
                 </div>
-                <div class=\"product-card\">
-                    <div class=\"product-img placeholder\"></div>
+                <div class=\"product-card fade-in\">
+                    <div class=\"product-badge\">新品</div>
+                    <div class=\"product-img\">
+                        <img src=\"https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=400&h=300&fit=crop\" alt=\"精密塑胶外壳\" loading=\"lazy\">
+                    </div>
                     <div class=\"product-info\">
-                        <h3>塑胶零件-B型</h3>
-                        <p>精密塑胶外壳，适用于电子产品防护</p>
-                        <span class=\"product-tag\">新品</span>
+                        <h3>精密塑胶外壳</h3>
+                        <p>精密塑胶外壳，适用于电子产品防护，防尘防水，耐用可靠</p>
+                        <a href=\"#contact\" class=\"product-contact\">了解详情 →</a>
                     </div>
                 </div>
-                <div class=\"product-card\">
-                    <div class=\"product-img placeholder\"></div>
+                <div class=\"product-card fade-in\">
+                    <div class=\"product-badge\">推荐</div>
+                    <div class=\"product-img\">
+                        <img src=\"https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=400&h=300&fit=crop\" alt=\"塑胶管材\" loading=\"lazy\">
+                    </div>
                     <div class=\"product-info\">
                         <h3>塑胶管材系列</h3>
-                        <p>多种规格塑胶管材，耐腐蚀、寿命长</p>
-                        <span class=\"product-tag\">推荐</span>
+                        <p>多种规格塑胶管材，耐腐蚀、寿命长，适用于各类流体输送</p>
+                        <a href=\"#contact\" class=\"product-contact\">了解详情 →</a>
                     </div>
                 </div>
-                <div class=\"product-card\">
-                    <div class=\"product-img placeholder\"></div>
+                <div class=\"product-card fade-in\">
+                    <div class=\"product-img\">
+                        <img src=\"https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=300&fit=crop\" alt=\"塑胶板材\" loading=\"lazy\">
+                    </div>
                     <div class=\"product-info\">
                         <h3>塑胶板材系列</h3>
-                        <p>高强度塑胶板材，适用于建筑及工业领域</p>
+                        <p>高强度塑胶板材，适用于建筑及工业领域，规格齐全</p>
+                        <a href=\"#contact\" class=\"product-contact\">了解详情 →</a>
                     </div>
                 </div>
-                <div class=\"product-card\">
-                    <div class=\"product-img placeholder\"></div>
+                <div class=\"product-card fade-in\">
+                    <div class=\"product-img\">
+                        <img src=\"https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=300&fit=crop\" alt=\"塑胶容器\" loading=\"lazy\">
+                    </div>
                     <div class=\"product-info\">
                         <h3>塑胶容器系列</h3>
-                        <p>密封性能好，适用于化工液体存储运输</p>
+                        <p>密封性能好，适用于化工液体存储运输，安全环保</p>
+                        <a href=\"#contact\" class=\"product-contact\">了解详情 →</a>
                     </div>
                 </div>
-                <div class=\"product-card\">
-                    <div class=\"product-img placeholder\"></div>
+                <div class=\"product-card fade-in\">
+                    <div class=\"product-badge\">可定制</div>
+                    <div class=\"product-img\">
+                        <img src=\"https://images.unsplash.com/photo-1581092335397-9583eb92d232?w=400&h=300&fit=crop\" alt=\"定制产品\" loading=\"lazy\">
+                    </div>
                     <div class=\"product-info\">
                         <h3>定制塑胶制品</h3>
-                        <p>可根据客户需求定制各种塑胶制品</p>
-                        <span class=\"product-tag\">可定制</span>
+                        <p>可根据客户需求定制各种塑胶制品，来图来样均可加工</p>
+                        <a href=\"#contact\" class=\"product-contact\">了解详情 →</a>
                     </div>
                 </div>
             </div>
@@ -120,28 +217,38 @@
     <!-- 联系我们 -->
     <section id=\"contact\" class=\"contact\">
         <div class=\"container\">
-            <h2 class=\"section-title\">联系我们</h2>
-            <p class=\"section-desc\">欢迎随时联系我们，我们将竭诚为您服务</p>
-            <div class=\"contact-grid\">
-                <div class=\"contact-item\">
-                    <div class=\"contact-icon\">📱</div>
-                    <h3>微信</h3>
-                    <p>519701445</p>
+            <div class=\"contact-wrapper fade-in\">
+                <div class=\"contact-header\">
+                    <span class=\"section-label section-label-light\">CONTACT</span>
+                    <h2 class=\"section-title section-title-light\">联系我们</h2>
+                    <div class=\"section-line section-line-light\"></div>
+                    <p class=\"section-desc section-desc-light\">欢迎随时联系我们，我们将竭诚为您服务</p>
                 </div>
-                <div class=\"contact-item\">
-                    <div class=\"contact-icon\">📞</div>
-                    <h3>电话</h3>
-                    <p>13775336388</p>
-                </div>
-                <div class=\"contact-item\">
-                    <div class=\"contact-icon\">📧</div>
-                    <h3>邮箱</h3>
-                    <p>519701445@qq.com</p>
-                </div>
-                <div class=\"contact-item\">
-                    <div class=\"contact-icon\">💬</div>
-                    <h3>WhatsApp</h3>
-                    <p>13775336388</p>
+                <div class=\"contact-grid\">
+                    <div class=\"contact-card\">
+                        <div class=\"contact-card-icon\">💬</div>
+                        <h3>微信</h3>
+                        <p class=\"contact-value\">519701445</p>
+                        <a href=\"https://weixin.qq.com/\" target=\"_blank\" class=\"contact-action\">立即咨询</a>
+                    </div>
+                    <div class=\"contact-card\">
+                        <div class=\"contact-card-icon\">📞</div>
+                        <h3>电话</h3>
+                        <p class=\"contact-value\"><a href=\"tel:13775336388\">13775336388</a></p>
+                        <a href=\"tel:13775336388\" class=\"contact-action\">拨打电话</a>
+                    </div>
+                    <div class=\"contact-card\">
+                        <div class=\"contact-card-icon\">📧</div>
+                        <h3>邮箱</h3>
+                        <p class=\"contact-value\"><a href=\"mailto:519701445@qq.com\">519701445@qq.com</a></p>
+                        <a href=\"mailto:519701445@qq.com\" class=\"contact-action\">发送邮件</a>
+                    </div>
+                    <div class=\"contact-card\">
+                        <div class=\"contact-card-icon\">🌐</div>
+                        <h3>WhatsApp</h3>
+                        <p class=\"contact-value\"><a href=\"https://wa.me/8613775336388\" target=\"_blank\">13775336388</a></p>
+                        <a href=\"https://wa.me/8613775336388\" target=\"_blank\" class=\"contact-action\">立即聊天</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -150,9 +257,25 @@
     <!-- 页脚 -->
     <footer class=\"footer\">
         <div class=\"container\">
+            <div class=\"footer-content\">
+                <div class=\"footer-brand\">
+                    <h3>宏昌塑胶</h3>
+                    <p>专业塑胶制品供应商</p>
+                </div>
+                <div class=\"footer-links\">
+                    <a href=\"#home\">首页</a>
+                    <a href=\"#about\">关于我们</a>
+                    <a href=\"#products\">产品中心</a>
+                    <a href=\"#contact\">联系我们</a>
+                </div>
+            </div>
+            <div class=\"footer-divider\"></div>
             <p>&copy; 2026 宏昌塑胶 版权所有</p>
         </div>
     </footer>
+
+    <!-- 回到顶部按钮 -->
+    <button class=\"back-to-top\" id=\"backToTop\" title=\"回到顶部\">↑</button>
 
     <script src=\"js/main.js\"></script>
 </body>
