@@ -1,13 +1,35 @@
-﻿// 加载动画
-window.addEventListener('load', function() {
-    const loader = document.getElementById('loader');
-    if (loader) {
-        setTimeout(function() { loader.classList.add('hidden'); }, 800);
-    }
-});
-
-// 等待 DOM 加载
+﻿// 等待 DOM 加载
 document.addEventListener('DOMContentLoaded', function() {
+
+// 语言切换功能
+let currentLang = 'zh';
+const langToggle = document.getElementById('langToggle');
+if (langToggle) {
+    langToggle.addEventListener('click', function() {
+        if (currentLang === 'zh') {
+            currentLang = 'en';
+            document.documentElement.lang = 'en';
+        } else {
+            currentLang = 'zh';
+            document.documentElement.lang = 'zh-CN';
+        }
+        switchLanguage(currentLang);
+    });
+}
+
+function switchLanguage(lang) {
+    const elements = document.querySelectorAll('[data-zh][data-en]');
+    elements.forEach(function(el) {
+        const text = el.getAttribute('data-' + lang);
+        if (text) {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = text;
+            } else {
+                el.innerHTML = text;
+            }
+        }
+    });
+}
 
 // 移动端导航菜单切换
 const hamburger = document.getElementById('hamburger');
@@ -29,7 +51,6 @@ if (hamburger && navLinks) {
     });
 }
 
-// 点击导航链接后自动关闭菜单
 const navItems = document.querySelectorAll('.nav-link');
 navItems.forEach(function(item) {
     item.addEventListener('click', function() {
@@ -39,7 +60,6 @@ navItems.forEach(function(item) {
     });
 });
 
-// 平滑滚动
 document.querySelectorAll('a[href^=\"#\"]').forEach(function(anchor) {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -51,23 +71,19 @@ document.querySelectorAll('a[href^=\"#\"]').forEach(function(anchor) {
     });
 });
 
-// 导航栏滚动效果
 window.addEventListener('scroll', function() {
     const navbar = document.getElementById('navbar');
     const backToTop = document.getElementById('backToTop');
-    
     if (navbar) {
         if (window.scrollY > 50) { navbar.classList.add('scrolled'); }
         else { navbar.classList.remove('scrolled'); }
     }
-
     if (backToTop) {
         if (window.scrollY > 400) { backToTop.classList.add('show'); }
         else { backToTop.classList.remove('show'); }
     }
 });
 
-// 回到顶部
 const backToTopBtn = document.getElementById('backToTop');
 if (backToTopBtn) {
     backToTopBtn.addEventListener('click', function() {
@@ -75,7 +91,6 @@ if (backToTopBtn) {
     });
 }
 
-// 滚动淡入动画
 function handleScrollAnimation() {
     const elements = document.querySelectorAll('.fade-in, .fade-up');
     elements.forEach(function(el) {
@@ -89,7 +104,6 @@ function handleScrollAnimation() {
 window.addEventListener('scroll', handleScrollAnimation);
 handleScrollAnimation();
 
-// 数字递增动画
 function animateCounters() {
     const counters = document.querySelectorAll('.stat-number[data-target]');
     counters.forEach(function(counter) {
@@ -117,7 +131,6 @@ function animateCounters() {
 window.addEventListener('scroll', animateCounters);
 animateCounters();
 
-// 导航高亮
 function updateActiveNav() {
     const sections = document.querySelectorAll('section[id]');
     const scrollPos = window.scrollY + 100;
@@ -138,5 +151,10 @@ function updateActiveNav() {
 }
 
 window.addEventListener('scroll', updateActiveNav);
+
+const loader = document.getElementById('loader');
+if (loader) {
+    setTimeout(function() { loader.classList.add('hidden'); }, 800);
+}
 
 }); // DOMContentLoaded end

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>宏昌塑胶 - 专业塑胶制品供应商</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
 /* ===== 基础重置 ===== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -296,6 +296,8 @@ body {
     .hero h1 { font-size: 26px; }
 }
 
+
+
     </style>
 </head>
 <body>
@@ -307,13 +309,14 @@ body {
         <div class="container nav-content">
             <a href="#home" class="logo">
                 <span class="logo-icon">宏</span>
-                <span class="logo-text">宏昌塑胶</span>
+                <span class="logo-text" data-zh="宏昌塑胶" data-en="Hongchang Plastic">宏昌塑胶</span>
             </a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#home" class="nav-link active">首页</a></li>
-                <li><a href="#about" class="nav-link">关于我们</a></li>
-                <li><a href="#products" class="nav-link">产品中心</a></li>
-                <li><a href="#contact" class="nav-link">联系我们</a></li>
+                <li><a href="#home" class="nav-link" data-zh="首页" data-en="Home">首页</a></li>
+                <li><a href="#about" class="nav-link" data-zh="关于我们" data-en="About Us">关于我们</a></li>
+                <li><a href="#products" class="nav-link" data-zh="产品中心" data-en="Products">产品中心</a></li>
+                <li><a href="#contact" class="nav-link" data-zh="联系我们" data-en="Contact">联系我们</a></li>
+                <li><a href="javascript:void(0)" class="lang-toggle" id="langToggle" data-zh="EN" data-en="中文">EN</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -325,16 +328,16 @@ body {
     <section id="home" class="hero">
         <div class="hero-bg-pattern"></div>
         <div class="container hero-content">
-            <div class="hero-badge fade-up">专注塑胶制品 · 品质值得信赖</div>
-            <h1 class="fade-up delay-1">专业塑胶制品<br>供应商</h1>
-            <p class="fade-up delay-2">宏昌塑胶致力于为客户提供高品质的塑胶产品及一站式解决方案</p>
+            <div class="hero-badge fade-up" data-zh="专注塑胶制品 · 品质值得信赖" data-en="Focus on Plastic Products · Quality You Can Trust">专注塑胶制品 · 品质值得信赖</div>
+            <h1 class="fade-up delay-1" data-zh="专业塑胶制品<br>供应商" data-en="Professional Plastic<br>Products Supplier">专业塑胶制品<br>供应商</h1>
+            <p class="fade-up delay-2" data-zh="宏昌塑胶致力于为客户提供高品质的塑胶产品及一站式解决方案" data-en="Hongchang Plastic is committed to providing customers with high-quality plastic products and one-stop solutions">宏昌塑胶致力于为客户提供高品质的塑胶产品及一站式解决方案</p>
             <div class="hero-buttons fade-up delay-3">
-                <a href="#products" class="btn-primary">查看产品</a>
-                <a href="#contact" class="btn-secondary">联系我们</a>
+                <a href="#products" class="btn-primary" data-zh="查看产品" data-en="View Products">查看产品</a>
+                <a href="#contact" class="btn-secondary" data-zh="联系我们" data-en="Contact Us">联系我们</a>
             </div>
         </div>
         <div class="hero-scroll-indicator">
-            <span>向下滚动</span>
+            <span data-zh="向下滚动" data-en="Scroll Down">向下滚动</span>
             <div class="scroll-arrow"></div>
         </div>
     </section>
@@ -343,23 +346,23 @@ body {
             <div class="advantage-grid">
                 <div class="advantage-item">
                     <div class="advantage-icon">🏭</div>
-                    <h3>源头工厂</h3>
-                    <p>自有生产线，直接从工厂发货，价格更优惠</p>
+                    <h3 data-zh="源头工厂" data-en="Direct Factory">源头工厂</h3>
+                    <p data-zh="自有生产线，直接从工厂发货，价格更优惠" data-en="Own production line, shipped directly from factory with better prices">自有生产线，直接从工厂发货，价格更优惠</p>
                 </div>
                 <div class="advantage-item">
                     <div class="advantage-icon">✅</div>
-                    <h3>品质保证</h3>
-                    <p>严格质检流程，确保每一件产品符合标准</p>
+                    <h3 data-zh="品质保证" data-en="Quality Guaranteed">品质保证</h3>
+                    <p data-zh="严格质检流程，确保每一件产品符合标准" data-en="Strict quality inspection to ensure every product meets standards">严格质检流程，确保每一件产品符合标准</p>
                 </div>
                 <div class="advantage-item">
                     <div class="advantage-icon">⚡</div>
-                    <h3>快速交付</h3>
-                    <p>库存充足，订单确认后快速安排发货</p>
+                    <h3 data-zh="快速交付" data-en="Fast Delivery">快速交付</h3>
+                    <p data-zh="库存充足，订单确认后快速安排发货" data-en="Ample stock, fast shipping after order confirmation">库存充足，订单确认后快速安排发货</p>
                 </div>
                 <div class="advantage-item">
                     <div class="advantage-icon">🎯</div>
-                    <h3>量身定制</h3>
-                    <p>可根据客户需求定制各种规格和产品</p>
+                    <h3 data-zh="量身定制" data-en="Custom Made">量身定制</h3>
+                    <p data-zh="可根据客户需求定制各种规格和产品" data-en="Custom specifications and products based on customer requirements">可根据客户需求定制各种规格和产品</p>
                 </div>
             </div>
         </div>
@@ -369,23 +372,23 @@ body {
             <div class="about-wrapper">
                 <div class="about-left fade-in">
                     <span class="section-label">ABOUT US</span>
-                    <h2 class="section-title">关于我们</h2>
+                    <h2 class="section-title" data-zh="关于我们" data-en="About Us">关于我们</h2>
                     <div class="section-line"></div>
-                    <p class="about-desc">宏昌塑胶是一家专业从事塑胶制品研发、生产、销售的企业。我们拥有先进的生产设备和技术团队，为客户提供高品质的塑胶产品和完善的售后服务。</p>
-                    <p class="about-desc">我们的产品广泛应用于工业、电子、汽车、家电等多个领域，深受客户信赖。我们始终坚持"质量第一、客户至上"的经营理念，不断提升产品和服务水平。</p>
+                    <p class="about-desc" data-zh="宏昌塑胶是一家专业从事塑胶制品研发、生产、销售的企业。我们拥有先进的生产设备和技术团队，为客户提供高品质的塑胶产品和完善的售后服务。" data-en="Hongchang Plastic is a company specializing in the R&D, production, and sales of plastic products. We have advanced production equipment and a technical team to provide customers with high-quality plastic products and comprehensive after-sales service.">宏昌塑胶是一家专业从事塑胶制品研发、生产、销售的企业。我们拥有先进的生产设备和技术团队，为客户提供高品质的塑胶产品和完善的售后服务。</p>
+                    <p class="about-desc" data-zh="我们的产品广泛应用于工业、电子、汽车、家电等多个领域，深受客户信赖。我们始终坚持"质量第一、客户至上"的经营理念，不断提升产品和服务水平。" data-en="Our products are widely used in industry, electronics, automotive, home appliances and other fields, deeply trusted by customers. We always adhere to the business philosophy of 'quality first, customer supreme' and continuously improve our products and services.">我们的产品广泛应用于工业、电子、汽车、家电等多个领域，深受客户信赖。我们始终坚持"质量第一、客户至上"的经营理念，不断提升产品和服务水平。</p>
                     <div class="about-features">
-                        <div class="feature-item"><span class="feature-check">✓</span><span>ISO 9001 质量管理体系</span></div>
-                        <div class="feature-item"><span class="feature-check">✓</span><span>10年以上行业经验</span></div>
-                        <div class="feature-item"><span class="feature-check">✓</span><span>500+ 合作客户</span></div>
-                        <div class="feature-item"><span class="feature-check">✓</span><span>100+ 产品种类</span></div>
+                        <div class="feature-item"><span class="feature-check">✓</span><span data-zh="ISO 9001 质量管理体系" data-en="ISO 9001 Quality System">ISO 9001 质量管理体系</span></div>
+                        <div class="feature-item"><span class="feature-check">✓</span><span data-zh="10年以上行业经验" data-en="10+ Years Experience">10年以上行业经验</span></div>
+                        <div class="feature-item"><span class="feature-check">✓</span><span data-zh="500+ 合作客户" data-en="500+ Clients">500+ 合作客户</span></div>
+                        <div class="feature-item"><span class="feature-check">✓</span><span data-zh="100+ 产品种类" data-en="100+ Products">100+ 产品种类</span></div>
                     </div>
                 </div>
                 <div class="about-right fade-in">
                     <div class="stats-grid">
-                        <div class="stat-card"><span class="stat-number" data-target="10">0</span><span class="stat-suffix">+</span><span class="stat-label">年行业经验</span></div>
-                        <div class="stat-card"><span class="stat-number" data-target="500">0</span><span class="stat-suffix">+</span><span class="stat-label">合作客户</span></div>
-                        <div class="stat-card"><span class="stat-number" data-target="100">0</span><span class="stat-suffix">+</span><span class="stat-label">产品种类</span></div>
-                        <div class="stat-card"><span class="stat-number" data-target="98">0</span><span class="stat-suffix">%</span><span class="stat-label">客户满意度</span></div>
+                        <div class="stat-card"><span class="stat-number" data-target="10">0</span><span class="stat-suffix">+</span><span class="stat-label" data-zh="年行业经验" data-en="Years Experience">年行业经验</span></div>
+                        <div class="stat-card"><span class="stat-number" data-target="500">0</span><span class="stat-suffix">+</span><span class="stat-label" data-zh="合作客户" data-en="Clients">合作客户</span></div>
+                        <div class="stat-card"><span class="stat-number" data-target="100">0</span><span class="stat-suffix">+</span><span class="stat-label" data-zh="产品种类" data-en="Products">产品种类</span></div>
+                        <div class="stat-card"><span class="stat-number" data-target="98">0</span><span class="stat-suffix">%</span><span class="stat-label" data-zh="客户满意度" data-en="Satisfaction">客户满意度</span></div>
                     </div>
                 </div>
             </div>
@@ -395,61 +398,61 @@ body {
         <div class="container">
             <div class="products-header fade-in">
                 <span class="section-label">PRODUCTS</span>
-                <h2 class="section-title">产品中心</h2>
+                <h2 class="section-title" data-zh="产品中心" data-en="Products">产品中心</h2>
                 <div class="section-line"></div>
-                <p class="section-desc">我们提供多种高品质的塑胶制品，满足不同行业的需求</p>
+                <p class="section-desc" data-zh="我们提供多种高品质的塑胶制品，满足不同行业的需求" data-en="We provide a variety of high-quality plastic products to meet the needs of different industries">我们提供多种高品质的塑胶制品，满足不同行业的需求</p>
             </div>
             <div class="product-grid">
                 <div class="product-card fade-in">
-                    <div class="product-badge">热销</div>
+                    <div class="product-badge" data-zh="热销" data-en="Hot">热销</div>
                     <div class="product-img"><div class="product-img-inner img-1"></div></div>
                     <div class="product-info">
-                        <h3>塑胶注塑件</h3>
-                        <p>高品质塑胶注塑件，适用于工业自动化设备，尺寸精准，表面光滑</p>
-                        <a href="#contact" class="product-contact">了解详情 →</a>
+                        <h3 data-zh="塑胶注塑件" data-en="Plastic Injection Parts">塑胶注塑件</h3>
+                        <p data-zh="高品质塑胶注塑件，适用于工业自动化设备，尺寸精准，表面光滑" data-en="High-quality plastic injection parts suitable for industrial automation equipment, precise dimensions and smooth surface">高品质塑胶注塑件，适用于工业自动化设备，尺寸精准，表面光滑</p>
+                        <a href="#contact" class="product-contact" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
                     </div>
                 </div>
                 <div class="product-card fade-in">
-                    <div class="product-badge">新品</div>
+                    <div class="product-badge" data-zh="新品" data-en="New">新品</div>
                     <div class="product-img"><div class="product-img-inner img-2"></div></div>
                     <div class="product-info">
-                        <h3>精密塑胶外壳</h3>
-                        <p>精密塑胶外壳，适用于电子产品防护，防尘防水，耐用可靠</p>
-                        <a href="#contact" class="product-contact">了解详情 →</a>
+                        <h3 data-zh="精密塑胶外壳" data-en="Precision Plastic Shells">精密塑胶外壳</h3>
+                        <p data-zh="精密塑胶外壳，适用于电子产品防护，防尘防水，耐用可靠" data-en="Precision plastic shells for electronic product protection, dustproof and waterproof, durable and reliable">精密塑胶外壳，适用于电子产品防护，防尘防水，耐用可靠</p>
+                        <a href="#contact" class="product-contact" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
                     </div>
                 </div>
                 <div class="product-card fade-in">
-                    <div class="product-badge">推荐</div>
+                    <div class="product-badge" data-zh="推荐" data-en="Recommended">推荐</div>
                     <div class="product-img"><div class="product-img-inner img-3"></div></div>
                     <div class="product-info">
-                        <h3>塑胶管材系列</h3>
-                        <p>多种规格塑胶管材，耐腐蚀、寿命长，适用于各类流体输送</p>
-                        <a href="#contact" class="product-contact">了解详情 →</a>
+                        <h3 data-zh="塑胶管材系列" data-en="Plastic Pipe Series">塑胶管材系列</h3>
+                        <p data-zh="多种规格塑胶管材，耐腐蚀、寿命长，适用于各类流体输送" data-en="Various sizes of plastic pipes, corrosion-resistant and long-lasting, suitable for fluid transportation">多种规格塑胶管材，耐腐蚀、寿命长，适用于各类流体输送</p>
+                        <a href="#contact" class="product-contact" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
                     </div>
                 </div>
                 <div class="product-card fade-in">
                     <div class="product-img"><div class="product-img-inner img-4"></div></div>
                     <div class="product-info">
-                        <h3>塑胶板材系列</h3>
-                        <p>高强度塑胶板材，适用于建筑及工业领域，规格齐全</p>
-                        <a href="#contact" class="product-contact">了解详情 →</a>
+                        <h3 data-zh="塑胶板材系列" data-en="Plastic Sheet Series">塑胶板材系列</h3>
+                        <p data-zh="高强度塑胶板材，适用于建筑及工业领域，规格齐全" data-en="High-strength plastic sheets suitable for construction and industrial fields, complete specifications">高强度塑胶板材，适用于建筑及工业领域，规格齐全</p>
+                        <a href="#contact" class="product-contact" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
                     </div>
                 </div>
                 <div class="product-card fade-in">
                     <div class="product-img"><div class="product-img-inner img-5"></div></div>
                     <div class="product-info">
-                        <h3>塑胶容器系列</h3>
-                        <p>密封性能好，适用于化工液体存储运输，安全环保</p>
-                        <a href="#contact" class="product-contact">了解详情 →</a>
+                        <h3 data-zh="塑胶容器系列" data-en="Plastic Container Series">塑胶容器系列</h3>
+                        <p data-zh="密封性能好，适用于化工液体存储运输，安全环保" data-en="Good sealing performance, suitable for chemical liquid storage and transportation, safe and environmentally friendly">密封性能好，适用于化工液体存储运输，安全环保</p>
+                        <a href="#contact" class="product-contact" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
                     </div>
                 </div>
                 <div class="product-card fade-in">
-                    <div class="product-badge">可定制</div>
+                    <div class="product-badge" data-zh="可定制" data-en="Customizable">可定制</div>
                     <div class="product-img"><div class="product-img-inner img-6"></div></div>
                     <div class="product-info">
-                        <h3>定制塑胶制品</h3>
-                        <p>可根据客户需求定制各种塑胶制品，来图来样均可加工</p>
-                        <a href="#contact" class="product-contact">了解详情 →</a>
+                        <h3 data-zh="定制塑胶制品" data-en="Custom Plastic Products">定制塑胶制品</h3>
+                        <p data-zh="可根据客户需求定制各种塑胶制品，来图来样均可加工" data-en="Custom plastic products according to customer requirements, drawings and samples accepted">可根据客户需求定制各种塑胶制品，来图来样均可加工</p>
+                        <a href="#contact" class="product-contact" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
                     </div>
                 </div>
             </div>
@@ -460,34 +463,34 @@ body {
             <div class="contact-wrapper fade-in">
                 <div class="contact-header">
                     <span class="section-label section-label-light">CONTACT</span>
-                    <h2 class="section-title section-title-light">联系我们</h2>
+                    <h2 class="section-title section-title-light" data-zh="联系我们" data-en="Contact Us">联系我们</h2>
                     <div class="section-line section-line-light"></div>
-                    <p class="section-desc section-desc-light">欢迎随时联系我们，我们将竭诚为您服务</p>
+                    <p class="section-desc section-desc-light" data-zh="欢迎随时联系我们，我们将竭诚为您服务" data-en="Welcome to contact us anytime, we will serve you wholeheartedly">欢迎随时联系我们，我们将竭诚为您服务</p>
                 </div>
                 <div class="contact-grid">
                     <div class="contact-card">
                         <div class="contact-card-icon">💬</div>
-                        <h3>微信</h3>
+                        <h3 data-zh="微信" data-en="WeChat">微信</h3>
                         <p class="contact-value">519701445</p>
-                        <a href="https://weixin.qq.com/" target="_blank" class="contact-action">立即咨询</a>
+                        <a href="https://weixin.qq.com/" target="_blank" class="contact-action" data-zh="立即咨询" data-en="Consult Now">立即咨询</a>
                     </div>
                     <div class="contact-card">
                         <div class="contact-card-icon">📞</div>
-                        <h3>电话</h3>
+                        <h3 data-zh="电话" data-en="Phone">电话</h3>
                         <p class="contact-value"><a href="tel:13775336388">13775336388</a></p>
-                        <a href="tel:13775336388" class="contact-action">拨打电话</a>
+                        <a href="tel:13775336388" class="contact-action" data-zh="拨打电话" data-en="Call Now">拨打电话</a>
                     </div>
                     <div class="contact-card">
                         <div class="contact-card-icon">📧</div>
-                        <h3>邮箱</h3>
+                        <h3 data-zh="邮箱" data-en="Email">邮箱</h3>
                         <p class="contact-value"><a href="mailto:519701445@qq.com">519701445@qq.com</a></p>
-                        <a href="mailto:519701445@qq.com" class="contact-action">发送邮件</a>
+                        <a href="mailto:519701445@qq.com" class="contact-action" data-zh="发送邮件" data-en="Send Email">发送邮件</a>
                     </div>
                     <div class="contact-card">
                         <div class="contact-card-icon">🌐</div>
                         <h3>WhatsApp</h3>
                         <p class="contact-value"><a href="https://wa.me/8613775336388" target="_blank">13775336388</a></p>
-                        <a href="https://wa.me/8613775336388" target="_blank" class="contact-action">立即聊天</a>
+                        <a href="https://wa.me/8613775336388" target="_blank" class="contact-action" data-zh="立即聊天" data-en="Chat Now">立即聊天</a>
                     </div>
                 </div>
             </div>
@@ -497,32 +500,54 @@ body {
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <h3>宏昌塑胶</h3>
-                    <p>专业塑胶制品供应商</p>
+                    <h3 data-zh="宏昌塑胶" data-en="Hongchang Plastic">宏昌塑胶</h3>
+                    <p data-zh="专业塑胶制品供应商" data-en="Professional Plastic Products Supplier">专业塑胶制品供应商</p>
                 </div>
                 <div class="footer-links">
-                    <a href="#home">首页</a>
-                    <a href="#about">关于我们</a>
-                    <a href="#products">产品中心</a>
-                    <a href="#contact">联系我们</a>
+                    <a href="#home" data-zh="首页" data-en="Home">首页</a>
+                    <a href="#about" data-zh="关于我们" data-en="About Us">关于我们</a>
+                    <a href="#products" data-zh="产品中心" data-en="Products">产品中心</a>
+                    <a href="#contact" data-zh="联系我们" data-en="Contact">联系我们</a>
                 </div>
             </div>
             <div class="footer-divider"></div>
-            <p>&copy; 2026 宏昌塑胶 版权所有</p>
+            <p>&copy; 2026 <span data-zh="宏昌塑胶 版权所有" data-en="Hongchang Plastic All Rights Reserved">宏昌塑胶 版权所有</span></p>
         </div>
     </footer>
     <button class="back-to-top" id="backToTop" title="回到顶部">↑</button>
     <script>
-// 加载动画
-window.addEventListener('load', function() {
-    const loader = document.getElementById('loader');
-    if (loader) {
-        setTimeout(function() { loader.classList.add('hidden'); }, 800);
-    }
-});
-
 // 等待 DOM 加载
 document.addEventListener('DOMContentLoaded', function() {
+
+// 语言切换功能
+let currentLang = 'zh';
+const langToggle = document.getElementById('langToggle');
+if (langToggle) {
+    langToggle.addEventListener('click', function() {
+        if (currentLang === 'zh') {
+            currentLang = 'en';
+            document.documentElement.lang = 'en';
+        } else {
+            currentLang = 'zh';
+            document.documentElement.lang = 'zh-CN';
+        }
+        switchLanguage(currentLang);
+    });
+}
+
+function switchLanguage(lang) {
+    const elements = document.querySelectorAll('[data-zh][data-en]');
+    elements.forEach(function(el) {
+        const text = el.getAttribute('data-' + lang);
+        if (text) {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = text;
+            } else {
+                el.innerHTML = text;
+            }
+        }
+    });
+}
 
 // 移动端导航菜单切换
 const hamburger = document.getElementById('hamburger');
@@ -544,7 +569,6 @@ if (hamburger && navLinks) {
     });
 }
 
-// 点击导航链接后自动关闭菜单
 const navItems = document.querySelectorAll('.nav-link');
 navItems.forEach(function(item) {
     item.addEventListener('click', function() {
@@ -554,7 +578,6 @@ navItems.forEach(function(item) {
     });
 });
 
-// 平滑滚动
 document.querySelectorAll('a[href^=\"#\"]').forEach(function(anchor) {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -566,23 +589,19 @@ document.querySelectorAll('a[href^=\"#\"]').forEach(function(anchor) {
     });
 });
 
-// 导航栏滚动效果
 window.addEventListener('scroll', function() {
     const navbar = document.getElementById('navbar');
     const backToTop = document.getElementById('backToTop');
-    
     if (navbar) {
         if (window.scrollY > 50) { navbar.classList.add('scrolled'); }
         else { navbar.classList.remove('scrolled'); }
     }
-
     if (backToTop) {
         if (window.scrollY > 400) { backToTop.classList.add('show'); }
         else { backToTop.classList.remove('show'); }
     }
 });
 
-// 回到顶部
 const backToTopBtn = document.getElementById('backToTop');
 if (backToTopBtn) {
     backToTopBtn.addEventListener('click', function() {
@@ -590,7 +609,6 @@ if (backToTopBtn) {
     });
 }
 
-// 滚动淡入动画
 function handleScrollAnimation() {
     const elements = document.querySelectorAll('.fade-in, .fade-up');
     elements.forEach(function(el) {
@@ -604,7 +622,6 @@ function handleScrollAnimation() {
 window.addEventListener('scroll', handleScrollAnimation);
 handleScrollAnimation();
 
-// 数字递增动画
 function animateCounters() {
     const counters = document.querySelectorAll('.stat-number[data-target]');
     counters.forEach(function(counter) {
@@ -632,7 +649,6 @@ function animateCounters() {
 window.addEventListener('scroll', animateCounters);
 animateCounters();
 
-// 导航高亮
 function updateActiveNav() {
     const sections = document.querySelectorAll('section[id]');
     const scrollPos = window.scrollY + 100;
@@ -654,7 +670,14 @@ function updateActiveNav() {
 
 window.addEventListener('scroll', updateActiveNav);
 
+const loader = document.getElementById('loader');
+if (loader) {
+    setTimeout(function() { loader.classList.add('hidden'); }, 800);
+}
+
 }); // DOMContentLoaded end
+
+
     </script>
 </body>
 </html>
