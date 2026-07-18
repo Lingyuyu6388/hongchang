@@ -1,0 +1,36 @@
+﻿/* ===== 钻头包装盒画廊 ===== */
+.drill-box-gallery {
+    width: 100%;
+    position: relative;
+}
+
+.gallery-main {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s;
+    border-radius: 0;
+}
+
+.gallery-thumbs {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background: #f5f5f5;
+}
+
+.gallery-thumbs img {
+    width: 25%;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+.gallery-thumbs img.active,
+.gallery-thumbs img:hover {
+    border-color: #2563eb;
+}

@@ -158,3 +158,20 @@ if (loader) {
 }
 
 }); // DOMContentLoaded end
+// 钻头包装盒图片切换
+const drillBoxImages = ['images/drill-box-1.jpg', 'images/drill-box-2.jpg', 'images/drill-box-3.jpg', 'images/drill-box-4.jpg'];
+function changeDrillBox(index) {
+    const mainImg = document.querySelector('.gallery-main');
+    const thumbs = document.querySelectorAll('.gallery-thumbs img');
+    if (mainImg) {
+        mainImg.style.opacity = '0.5';
+        setTimeout(function() {
+            mainImg.src = drillBoxImages[index];
+            mainImg.style.opacity = '1';
+        }, 150);
+    }
+    if (thumbs.length > 0) {
+        thumbs.forEach(function(t) { t.classList.remove('active'); });
+        thumbs[index].classList.add('active');
+    }
+}
