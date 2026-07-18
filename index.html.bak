@@ -2333,23 +2333,5 @@ if (loader) {
             </div>
             <p class="popup-desc" data-zh="优质塑胶材质，多规格收纳，防尘防水，携带方便" data-en="High-quality plastic material, multi-specification storage, dustproof and waterproof, easy to carry">优质塑胶材质，多规格收纳，防尘防水，携带方便</p>
         </div>
-    </div>
-    <div class="product-popup" id="productPopup">
-        <div class="popup-overlay" onclick="closePopup()"></div>
-        <div class="popup-content">
-            <span class="popup-close" onclick="closePopup()">&#10005;</span>
-            <h2 data-zh="钻头包装盒" data-en="Drill Bit Box">钻头包装盒</h2>
-            <div class="popup-main-img">
-                <img id="popupMainImg" src="images/drill-box-1.jpg" alt="钻头包装盒">
-            </div>
-            <div class="popup-thumbs">
-                <img src="images/drill-box-1.jpg" onclick="changePopupImg(0)" class="popup-thumb active">
-                <img src="images/drill-box-2.jpg" onclick="changePopupImg(1)" class="popup-thumb">
-                <img src="images/drill-box-3.jpg" onclick="changePopupImg(2)" class="popup-thumb">
-                <img src="images/drill-box-4.jpg" onclick="changePopupImg(3)" class="popup-thumb">
-            </div>
-            <p class="popup-desc" data-zh="优质塑胶材质，多规格收纳，防尘防水，携带方便" data-en="High-quality plastic material, multi-specification storage, dustproof and waterproof, easy to carry">优质塑胶材质，多规格收纳，防尘防水，携带方便</p>
-        </div>
-    </div>
-</body>
+    </div></body>
 </html>
