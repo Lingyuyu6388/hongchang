@@ -303,6 +303,359 @@ body {
 .gallery-thumbs img { width: 25%; height: 60px; object-fit: cover; cursor: pointer; border: 2px solid transparent; border-radius: 4px; transition: border-color 0.3s; }
 .gallery-thumbs img.active, .gallery-thumbs img:hover { border-color: #2563eb; }
 
+/* ===== 产品详情弹窗 ===== */
+.product-popup {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 10000;
+}
+.product-popup.show { display: flex; align-items: center; justify-content: center; }
+.popup-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+}
+.popup-content {
+    position: relative;
+    background: #fff;
+    border-radius: 16px;
+    max-width: 600px; width: 90%;
+    max-height: 90vh; overflow-y: auto;
+    padding: 40px 30px;
+    z-index: 1;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.popup-close {
+    position: absolute; top: 15px; right: 20px;
+    font-size: 28px; color: #999; cursor: pointer;
+    transition: color 0.3s; line-height: 1;
+}
+.popup-close:hover { color: #000; }
+.popup-content h2 { font-size: 24px; margin-bottom: 20px; color: #000; }
+.popup-main-img {
+    width: 100%; height: 350px;
+    background: #f5f5f5;
+    border-radius: 12px;
+    overflow: hidden; margin-bottom: 15px;
+}
+.popup-main-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s;
+}
+.popup-thumbs {
+    display: flex; gap: 8px; margin-bottom: 20px;
+}
+.popup-thumb {
+    width: 25%; height: 70px;
+    object-fit: cover; cursor: pointer;
+    border: 2px solid transparent; border-radius: 8px;
+    transition: border-color 0.3s;
+}
+.popup-thumb.active, .popup-thumb:hover { border-color: #2563eb; }
+.popup-desc { font-size: 15px; color: #666; line-height: 1.8; }
+@media (max-width: 768px) {
+    .popup-content { padding: 30px 20px; }
+    .popup-main-img { height: 250px; }
+    .popup-content h2 { font-size: 20px; }
+}
+
+/* ===== 基础重置 ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif;
+    color: #333; line-height: 1.6; overflow-x: hidden;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* ===== 加载动画 ===== */
+.loader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #0a0a0a; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; z-index: 9999;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+.loader.hidden { opacity: 0; visibility: hidden; }
+.loader-circle {
+    width: 60px; height: 60px;
+    border: 3px solid rgba(255,255,255,0.1);
+    border-top-color: #2563eb; border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loader-text { color: #fff; margin-top: 20px; font-size: 18px; letter-spacing: 4px; }
+
+/* ===== 导航栏 ===== */
+.navbar {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    position: fixed; width: 100%; top: 0; z-index: 1000;
+    transition: all 0.3s;
+}
+.navbar.scrolled { box-shadow: 0 2px 30px rgba(0,0,0,0.08); }
+.nav-content {
+    display: flex; justify-content: space-between; align-items: center; height: 70px;
+}
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 900; border-radius: 8px;
+}
+.logo-text { font-size: 20px; font-weight: 700; color: #000; letter-spacing: 1px; }
+.nav-links { display: flex; list-style: none; gap: 10px; }
+.nav-link {
+    text-decoration: none; color: #555; font-size: 15px;
+    font-weight: 500; padding: 8px 18px; border-radius: 6px;
+    transition: all 0.3s;
+}
+.nav-link:hover, .nav-link.active { color: #2563eb; background: rgba(37,99,235,0.08); }
+.hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; padding: 5px; }
+.hamburger span { width: 25px; height: 2.5px; background: #000; border-radius: 2px; transition: 0.3s; }
+
+/* ===== 首页横幅 ===== */
+.hero {
+    margin-top: 70px; min-height: 600px;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+}
+.hero-bg-pattern {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+        radial-gradient(circle at 20% 30%, rgba(37,99,235,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(37,99,235,0.1) 0%, transparent 50%);
+}
+.hero-content { position: relative; z-index: 1; padding: 60px 0; }
+.hero-badge {
+    display: inline-block; padding: 8px 24px;
+    background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.3);
+    color: #60a5fa; font-size: 14px; border-radius: 50px;
+    margin-bottom: 30px; letter-spacing: 2px;
+}
+.hero h1 { font-size: 56px; margin-bottom: 20px; letter-spacing: 3px; color: #fff; font-weight: 900; line-height: 1.3; }
+.hero h1 br { display: block; }
+.hero p { font-size: 18px; margin-bottom: 40px; opacity: 0.7; color: #ccc; max-width: 600px; margin-left: auto; margin-right: auto; }
+.hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+    display: inline-block; padding: 16px 44px; background: #2563eb;
+    color: #fff; text-decoration: none; font-size: 16px; font-weight: 600;
+    border-radius: 8px; transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(37,99,235,0.4);
+}
+.btn-primary:hover { background: #1d4ed8; transform: translateY(-3px); box-shadow: 0 8px 30px rgba(37,99,235,0.5); }
+.btn-secondary {
+    display: inline-block; padding: 16px 44px; background: transparent;
+    color: #fff; text-decoration: none; font-size: 16px; font-weight: 600;
+    border-radius: 8px; border: 2px solid rgba(255,255,255,0.3); transition: all 0.3s;
+}
+.btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.1); transform: translateY(-3px); }
+.hero-scroll-indicator {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.4); font-size: 12px; letter-spacing: 2px;
+}
+.scroll-arrow {
+    width: 20px; height: 20px;
+    border-right: 2px solid rgba(255,255,255,0.4);
+    border-bottom: 2px solid rgba(255,255,255,0.4);
+    transform: rotate(45deg);
+    animation: bounce 2s infinite;
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: rotate(45deg) translateY(0); }
+    40% { transform: rotate(45deg) translateY(-8px); }
+    60% { transform: rotate(45deg) translateY(-4px); }
+}
+
+/* ===== 通用标题 ===== */
+.section-label {
+    display: inline-block; font-size: 12px; font-weight: 700;
+    letter-spacing: 4px; color: #2563eb; margin-bottom: 12px; text-transform: uppercase;
+}
+.section-title { font-size: 36px; margin-bottom: 15px; color: #000; font-weight: 800; line-height: 1.3; }
+.section-line { width: 60px; height: 3px; background: linear-gradient(90deg, #2563eb, #60a5fa); border-radius: 2px; margin-bottom: 20px; }
+.section-desc { text-align: center; font-size: 16px; color: #888; margin-bottom: 60px; }
+
+/* ===== 优势亮点 ===== */
+.advantages { padding: 80px 0; background: #fff; }
+.advantage-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+.advantage-item {
+    text-align: center; padding: 40px 25px; border-radius: 12px;
+    transition: all 0.3s; border: 1px solid #f0f0f0;
+}
+.advantage-item:hover { transform: translateY(-5px); box-shadow: 0 10px 40px rgba(0,0,0,0.08); border-color: transparent; }
+.advantage-icon { font-size: 48px; margin-bottom: 18px; }
+.advantage-item h3 { font-size: 18px; margin-bottom: 10px; color: #000; font-weight: 700; }
+.advantage-item p { font-size: 14px; color: #777; line-height: 1.8; }
+
+/* ===== 关于我们 ===== */
+.about { padding: 100px 0; background: #fafbfc; }
+.about-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-left .section-title { text-align: left; }
+.about-left .section-line { margin-bottom: 25px; }
+.about-desc { margin-bottom: 16px; font-size: 15px; color: #555; line-height: 2; text-align: justify; }
+.about-features { margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.feature-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #444; }
+.feature-check {
+    width: 22px; height: 22px; background: #2563eb; color: #fff;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; flex-shrink: 0;
+}
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.stat-card {
+    text-align: center; padding: 35px 20px; background: #fff;
+    border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+.stat-card:hover { transform: translateY(-5px); }
+.stat-number { font-size: 48px; font-weight: 900; color: #2563eb; }
+.stat-suffix { font-size: 24px; font-weight: 700; color: #2563eb; }
+.stat-label { display: block; margin-top: 8px; font-size: 14px; color: #888; }
+
+/* ===== 产品中心 ===== */
+.products { padding: 100px 0; background: #fff; }
+.products-header { text-align: center; margin-bottom: 50px; }
+.products-header .section-title { text-align: center; }
+.products-header .section-line { margin: 0 auto 20px; }
+.product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.product-card {
+    background: #fff; border-radius: 16px; overflow: hidden;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    transition: all 0.4s; border: 1px solid #f0f0f0; position: relative;
+}
+.product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 50px rgba(0,0,0,0.12); border-color: transparent; }
+.product-badge {
+    position: absolute; top: 15px; right: 15px; padding: 5px 14px;
+    background: #2563eb; color: #fff; font-size: 12px;
+    border-radius: 4px; font-weight: 600; z-index: 2;
+}
+.product-img { width: 100%; height: 220px; overflow: hidden; background: #f5f5f5; position: relative; }
+.product-img-inner {
+    width: 100%; height: 100%;
+    background-size: cover; background-position: center;
+    transition: transform 0.6s;
+}
+.product-card:hover .product-img-inner { transform: scale(1.05); }
+.img-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.img-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+.img-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+.img-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+.img-5 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+.img-6 { background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); }
+.product-img-inner::after {
+    content: "\1F4E6";
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px; opacity: 0.6;
+}
+.product-info { padding: 24px; }
+.product-info h3 { font-size: 19px; margin-bottom: 10px; color: #000; font-weight: 700; }
+.product-info p { font-size: 14px; color: #777; margin-bottom: 16px; line-height: 1.8; }
+.product-contact { display: inline-block; font-size: 14px; color: #2563eb; text-decoration: none; font-weight: 600; transition: all 0.3s; }
+.product-contact:hover { color: #1d4ed8; letter-spacing: 1px; }
+
+/* ===== 联系我们 ===== */
+.contact { padding: 100px 0; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
+.contact-wrapper { max-width: 900px; margin: 0 auto; }
+.section-label-light { color: #60a5fa !important; }
+.section-title-light { color: #fff !important; }
+.section-line-light { background: linear-gradient(90deg, #2563eb, #60a5fa) !important; margin: 0 auto 20px !important; }
+.section-desc-light { color: #888 !important; }
+.contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.contact-card {
+    text-align: center; padding: 40px 25px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px; transition: all 0.3s;
+}
+.contact-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-5px); border-color: rgba(37,99,235,0.4); }
+.contact-card-icon { font-size: 40px; margin-bottom: 15px; }
+.contact-card h3 { font-size: 18px; margin-bottom: 10px; color: #fff; font-weight: 600; }
+.contact-value { font-size: 16px; color: #aaa; margin-bottom: 15px; word-break: break-all; }
+.contact-value a { color: #60a5fa; text-decoration: none; transition: color 0.3s; }
+.contact-value a:hover { color: #fff; }
+.contact-action {
+    display: inline-block; padding: 8px 24px;
+    border: 1px solid rgba(37,99,235,0.5); color: #60a5fa;
+    text-decoration: none; font-size: 13px; border-radius: 6px;
+    transition: all 0.3s;
+}
+.contact-action:hover { background: #2563eb; border-color: #2563eb; color: #fff; }
+
+/* ===== 页脚 ===== */
+.footer { background: #050505; color: #555; padding: 50px 0 30px; }
+.footer-content { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.footer-brand h3 { color: #fff; font-size: 22px; margin-bottom: 5px; }
+.footer-brand p { color: #666; font-size: 14px; }
+.footer-links { display: flex; gap: 30px; }
+.footer-links a { color: #888; text-decoration: none; font-size: 14px; transition: color 0.3s; }
+.footer-links a:hover { color: #2563eb; }
+.footer-divider { height: 1px; background: #1a1a1a; margin-bottom: 25px; }
+.footer p { text-align: center; font-size: 13px; }
+
+/* ===== 回到顶部 ===== */
+.back-to-top {
+    position: fixed; bottom: 30px; right: 30px;
+    width: 48px; height: 48px; background: #2563eb; color: #fff;
+    border: none; border-radius: 12px; font-size: 20px;
+    cursor: pointer; opacity: 0; visibility: hidden;
+    transition: all 0.3s; box-shadow: 0 4px 15px rgba(37,99,235,0.4); z-index: 999;
+}
+.back-to-top.show { opacity: 1; visibility: visible; }
+.back-to-top:hover { background: #1d4ed8; transform: translateY(-3px); }
+
+/* ===== 滚动动画 ===== */
+.fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+.fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; position: absolute; top: 70px; left: 0; width: 100%;
+        background: #fff; flex-direction: column; padding: 20px; gap: 5px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .nav-links.active { display: flex; }
+    .nav-link { padding: 12px 18px; }
+    .hamburger { display: flex; }
+    .hero { min-height: 500px; }
+    .hero h1 { font-size: 32px; }
+    .hero p { font-size: 15px; }
+    .hero-buttons { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-secondary { width: 200px; text-align: center; }
+    .advantage-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .advantage-item { padding: 25px 15px; }
+    .about-wrapper { grid-template-columns: 1fr; gap: 40px; }
+    .about-left .section-title { text-align: center; }
+    .about-left .section-line { margin: 0 auto 25px; }
+    .about-features { grid-template-columns: 1fr; }
+    .product-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .footer-content { flex-direction: column; gap: 20px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .section-title { font-size: 28px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+    .advantage-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 26px; }
+}
+
+/* ===== 钻头包装盒画廊 ===== */
+.drill-box-gallery { width: 100%; position: relative; }
+.gallery-main { width: 100%; height: 220px; object-fit: cover; display: block; transition: opacity 0.3s; border-radius: 0; }
+.gallery-thumbs { display: flex; gap: 4px; padding: 4px; background: #f5f5f5; }
+.gallery-thumbs img { width: 25%; height: 60px; object-fit: cover; cursor: pointer; border: 2px solid transparent; border-radius: 4px; transition: border-color 0.3s; }
+.gallery-thumbs img.active, .gallery-thumbs img:hover { border-color: #2563eb; }
+
 /* ===== 基础重置 ===== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -715,7 +1068,7 @@ body {
                     <div class="product-info">
                         <h3 data-zh="钻头包装盒" data-en="Drill Bit Box">钻头包装盒</h3>
                         <p data-zh="优质塑胶材质，多规格收纳，防尘防水，携带方便" data-en="High-quality plastic material, multi-specification storage, dustproof and waterproof, easy to carry">优质塑胶材质，多规格收纳，防尘防水，携带方便</p>
-                        <a href="#contact" class="product-contact" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
+                        <a href="javascript:void(0)" class="product-contact" onclick="openPopup()" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
                     </div>
                 </div><div class="product-card fade-in">
                     <div class="product-badge" data-zh="热销" data-en="Hot">热销</div>
@@ -723,7 +1076,7 @@ body {
                     <div class="product-info">
                         <h3 data-zh="塑胶注塑件" data-en="Plastic Injection Parts">塑胶注塑件</h3>
                         <p data-zh="高品质塑胶注塑件，适用于工业自动化设备，尺寸精准，表面光滑" data-en="High-quality plastic injection parts suitable for industrial automation equipment, precise dimensions and smooth surface">高品质塑胶注塑件，适用于工业自动化设备，尺寸精准，表面光滑</p>
-                        <a href="#contact" class="product-contact" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
+                        <a href="javascript:void(0)" class="product-contact" onclick="openPopup()" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
                     </div>
                 </div>
                 <div class="product-card fade-in">
@@ -732,7 +1085,7 @@ body {
                     <div class="product-info">
                         <h3 data-zh="精密塑胶外壳" data-en="Precision Plastic Shells">精密塑胶外壳</h3>
                         <p data-zh="精密塑胶外壳，适用于电子产品防护，防尘防水，耐用可靠" data-en="Precision plastic shells for electronic product protection, dustproof and waterproof, durable and reliable">精密塑胶外壳，适用于电子产品防护，防尘防水，耐用可靠</p>
-                        <a href="#contact" class="product-contact" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
+                        <a href="javascript:void(0)" class="product-contact" onclick="openPopup()" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
                     </div>
                 </div>
                 <div class="product-card fade-in">
@@ -741,7 +1094,7 @@ body {
                     <div class="product-info">
                         <h3 data-zh="塑胶管材系列" data-en="Plastic Pipe Series">塑胶管材系列</h3>
                         <p data-zh="多种规格塑胶管材，耐腐蚀、寿命长，适用于各类流体输送" data-en="Various sizes of plastic pipes, corrosion-resistant and long-lasting, suitable for fluid transportation">多种规格塑胶管材，耐腐蚀、寿命长，适用于各类流体输送</p>
-                        <a href="#contact" class="product-contact" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
+                        <a href="javascript:void(0)" class="product-contact" onclick="openPopup()" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
                     </div>
                 </div>
                 <div class="product-card fade-in">
@@ -749,7 +1102,7 @@ body {
                     <div class="product-info">
                         <h3 data-zh="塑胶板材系列" data-en="Plastic Sheet Series">塑胶板材系列</h3>
                         <p data-zh="高强度塑胶板材，适用于建筑及工业领域，规格齐全" data-en="High-strength plastic sheets suitable for construction and industrial fields, complete specifications">高强度塑胶板材，适用于建筑及工业领域，规格齐全</p>
-                        <a href="#contact" class="product-contact" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
+                        <a href="javascript:void(0)" class="product-contact" onclick="openPopup()" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
                     </div>
                 </div>
                 <div class="product-card fade-in">
@@ -757,7 +1110,7 @@ body {
                     <div class="product-info">
                         <h3 data-zh="塑胶容器系列" data-en="Plastic Container Series">塑胶容器系列</h3>
                         <p data-zh="密封性能好，适用于化工液体存储运输，安全环保" data-en="Good sealing performance, suitable for chemical liquid storage and transportation, safe and environmentally friendly">密封性能好，适用于化工液体存储运输，安全环保</p>
-                        <a href="#contact" class="product-contact" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
+                        <a href="javascript:void(0)" class="product-contact" onclick="openPopup()" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
                     </div>
                 </div>
                 <div class="product-card fade-in">
@@ -766,7 +1119,7 @@ body {
                     <div class="product-info">
                         <h3 data-zh="定制塑胶制品" data-en="Custom Plastic Products">定制塑胶制品</h3>
                         <p data-zh="可根据客户需求定制各种塑胶制品，来图来样均可加工" data-en="Custom plastic products according to customer requirements, drawings and samples accepted">可根据客户需求定制各种塑胶制品，来图来样均可加工</p>
-                        <a href="#contact" class="product-contact" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
+                        <a href="javascript:void(0)" class="product-contact" onclick="openPopup()" data-zh="了解详情 →" data-en="Learn More →">了解详情 →</a>
                     </div>
                 </div>
             </div>
@@ -830,6 +1183,225 @@ body {
     </footer>
     <button class="back-to-top" id="backToTop" title="回到顶部">↑</button>
     <script>
+// 等待 DOM 加载
+document.addEventListener('DOMContentLoaded', function() {
+
+// 语言切换功能
+let currentLang = 'zh';
+const langToggle = document.getElementById('langToggle');
+if (langToggle) {
+    langToggle.addEventListener('click', function() {
+        if (currentLang === 'zh') {
+            currentLang = 'en';
+            document.documentElement.lang = 'en';
+        } else {
+            currentLang = 'zh';
+            document.documentElement.lang = 'zh-CN';
+        }
+        switchLanguage(currentLang);
+    });
+}
+
+function switchLanguage(lang) {
+    const elements = document.querySelectorAll('[data-zh][data-en]');
+    elements.forEach(function(el) {
+        const text = el.getAttribute('data-' + lang);
+        if (text) {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = text;
+            } else {
+                el.innerHTML = text;
+            }
+        }
+    });
+}
+
+// 移动端导航菜单切换
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+
+if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        const spans = hamburger.querySelectorAll('span');
+        if (navLinks.classList.contains('active')) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+        } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
+    });
+}
+
+const navItems = document.querySelectorAll('.nav-link');
+navItems.forEach(function(item) {
+    item.addEventListener('click', function() {
+        if (navLinks && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+        }
+    });
+});
+
+document.querySelectorAll('a[href^=\"#\"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const offsetTop = target.offsetTop - 70;
+            window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+        }
+    });
+});
+
+window.addEventListener('scroll', function() {
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('backToTop');
+    if (navbar) {
+        if (window.scrollY > 50) { navbar.classList.add('scrolled'); }
+        else { navbar.classList.remove('scrolled'); }
+    }
+    if (backToTop) {
+        if (window.scrollY > 400) { backToTop.classList.add('show'); }
+        else { backToTop.classList.remove('show'); }
+    }
+});
+
+const backToTopBtn = document.getElementById('backToTop');
+if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+function handleScrollAnimation() {
+    const elements = document.querySelectorAll('.fade-in, .fade-up');
+    elements.forEach(function(el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+            el.classList.add('visible');
+        }
+    });
+}
+
+window.addEventListener('scroll', handleScrollAnimation);
+handleScrollAnimation();
+
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number[data-target]');
+    counters.forEach(function(counter) {
+        const rect = counter.getBoundingClientRect();
+        if (rect.top < window.innerHeight && !counter.dataset.animated) {
+            counter.dataset.animated = 'true';
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+            function updateCounter() {
+                current += step;
+                if (current < target) {
+                    counter.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target;
+                }
+            }
+            updateCounter();
+        }
+    });
+}
+
+window.addEventListener('scroll', animateCounters);
+animateCounters();
+
+function updateActiveNav() {
+    const sections = document.querySelectorAll('section[id]');
+    const scrollPos = window.scrollY + 100;
+    sections.forEach(function(section) {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+        const link = document.querySelector('.nav-link[href=\"#' + id + '\"]');
+        if (link) {
+            if (scrollPos >= top && scrollPos < top + height) {
+                document.querySelectorAll('.nav-link').forEach(function(l) {
+                    l.classList.remove('active');
+                });
+                link.classList.add('active');
+            }
+        }
+    });
+}
+
+window.addEventListener('scroll', updateActiveNav);
+
+const loader = document.getElementById('loader');
+if (loader) {
+    setTimeout(function() { loader.classList.add('hidden'); }, 800);
+}
+
+}); // DOMContentLoaded end
+// 钻头包装盒图片切换
+const drillBoxImages = ['images/drill-box-1.jpg', 'images/drill-box-2.jpg', 'images/drill-box-3.jpg', 'images/drill-box-4.jpg'];
+function changeDrillBox(index) {
+    const mainImg = document.querySelector('.gallery-main');
+    const thumbs = document.querySelectorAll('.gallery-thumbs img');
+    if (mainImg) {
+        mainImg.style.opacity = '0.5';
+        setTimeout(function() {
+            mainImg.src = drillBoxImages[index];
+            mainImg.style.opacity = '1';
+        }, 150);
+    }
+    if (thumbs.length > 0) {
+        thumbs.forEach(function(t) { t.classList.remove('active'); });
+        thumbs[index].classList.add('active');
+    }
+}
+// 产品详情弹窗
+const popupImages = ['images/drill-box-1.jpg', 'images/drill-box-2.jpg', 'images/drill-box-3.jpg', 'images/drill-box-4.jpg'];
+let currentPopupIndex = 0;
+
+function openPopup() {
+    const popup = document.getElementById('productPopup');
+    if (popup) {
+        popup.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closePopup() {
+    const popup = document.getElementById('productPopup');
+    if (popup) {
+        popup.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+}
+
+function changePopupImg(index) {
+    const mainImg = document.getElementById('popupMainImg');
+    const thumbs = document.querySelectorAll('.popup-thumb');
+    if (mainImg) {
+        mainImg.style.opacity = '0.5';
+        setTimeout(function() {
+            mainImg.src = popupImages[index];
+            mainImg.style.opacity = '1';
+        }, 150);
+    }
+    if (thumbs.length > 0) {
+        thumbs.forEach(function(t) { t.classList.remove('active'); });
+        thumbs[index].classList.add('active');
+    }
+    currentPopupIndex = index;
+}
+
+// ESC 键关闭弹窗
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { closePopup(); }
+});
+
 // 等待 DOM 加载
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -1172,5 +1744,22 @@ if (loader) {
 
 
     </script>
-</body>
+    <!-- 产品详情弹窗 -->
+    <div class="product-popup" id="productPopup">
+        <div class="popup-overlay" onclick="closePopup()"></div>
+        <div class="popup-content">
+            <span class="popup-close" onclick="closePopup()">✕</span>
+            <h2 data-zh="钻头包装盒" data-en="Drill Bit Box">钻头包装盒</h2>
+            <div class="popup-main-img">
+                <img id="popupMainImg" src="images/drill-box-1.jpg" alt="钻头包装盒">
+            </div>
+            <div class="popup-thumbs">
+                <img src="images/drill-box-1.jpg" onclick="changePopupImg(0)" class="popup-thumb active">
+                <img src="images/drill-box-2.jpg" onclick="changePopupImg(1)" class="popup-thumb">
+                <img src="images/drill-box-3.jpg" onclick="changePopupImg(2)" class="popup-thumb">
+                <img src="images/drill-box-4.jpg" onclick="changePopupImg(3)" class="popup-thumb">
+            </div>
+            <p class="popup-desc" data-zh="优质塑胶材质，多规格收纳，防尘防水，携带方便" data-en="High-quality plastic material, multi-specification storage, dustproof and waterproof, easy to carry">优质塑胶材质，多规格收纳，防尘防水，携带方便</p>
+        </div>
+    </div></body>
 </html>

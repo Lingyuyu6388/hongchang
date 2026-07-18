@@ -175,3 +175,44 @@ function changeDrillBox(index) {
         thumbs[index].classList.add('active');
     }
 }
+// 产品详情弹窗
+const popupImages = ['images/drill-box-1.jpg', 'images/drill-box-2.jpg', 'images/drill-box-3.jpg', 'images/drill-box-4.jpg'];
+let currentPopupIndex = 0;
+
+function openPopup() {
+    const popup = document.getElementById('productPopup');
+    if (popup) {
+        popup.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closePopup() {
+    const popup = document.getElementById('productPopup');
+    if (popup) {
+        popup.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+}
+
+function changePopupImg(index) {
+    const mainImg = document.getElementById('popupMainImg');
+    const thumbs = document.querySelectorAll('.popup-thumb');
+    if (mainImg) {
+        mainImg.style.opacity = '0.5';
+        setTimeout(function() {
+            mainImg.src = popupImages[index];
+            mainImg.style.opacity = '1';
+        }, 150);
+    }
+    if (thumbs.length > 0) {
+        thumbs.forEach(function(t) { t.classList.remove('active'); });
+        thumbs[index].classList.add('active');
+    }
+    currentPopupIndex = index;
+}
+
+// ESC 键关闭弹窗
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { closePopup(); }
+});
